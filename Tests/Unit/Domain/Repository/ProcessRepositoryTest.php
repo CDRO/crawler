@@ -27,6 +27,7 @@ namespace AOE\Crawler\Tests\Unit\Domain\Repository;
 
 use AOE\Crawler\Domain\Repository\ProcessRepository;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class ProcessRepositoryTest
@@ -43,9 +44,11 @@ class ProcessRepositoryTest extends UnitTestCase
      */
     public function getLimitFromItemCountAndOffset($itemCount, $offset, $expected)
     {
+        $processRepository = GeneralUtility::makeInstance(ProcessRepository::class);
+
         $this->assertEquals(
             $expected,
-            ProcessRepository::getLimitFromItemCountAndOffset($itemCount, $offset)
+            $processRepository->getLimitFromItemCountAndOffset($itemCount, $offset)
         );
     }
 
